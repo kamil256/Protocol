@@ -84,7 +84,7 @@ function List(inputId, tbodyId, xml, tag, infoArgs)
         tbody.nextSibling.style.display = "none";
         if (fullClear)
             input.value = "";
-    };
+    }
     
     function fill()
     {
@@ -126,7 +126,7 @@ function List(inputId, tbodyId, xml, tag, infoArgs)
             trElements[0].style.backgroundColor = "#aaa";
             tbody.style.display = "table-row-group";
         }
-    };
+    }
     
     function fillTable(more)
     {
