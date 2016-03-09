@@ -56,7 +56,6 @@ function List(inputId, tbodyId, xml, tag, infoArgs)
         if ((key != 13) && (key != 27) && (key != 38) && (key != 40))
         {
             clear(false);
-            var keyword = input.value;
             if (input.value != "")
                 fill();
         }        
