@@ -8,10 +8,10 @@ window.onload = function()
     
     requestEmployees.onreadystatechange = function(e)
     {
-        if (requestEmployees.readyState == XMLHttpRequest.DONE && requestEmployees.status == 200)
+        if (requestEmployees.readyState === XMLHttpRequest.DONE && requestEmployees.status === 200)
         {
             var employees = new List("inp_emp", "emp_list", requestEmployees.responseXML, "person", ["id", "name", "department"]);
-            employees.addEventListener("submit", function(e) { fillEmployee(e); });
+            //employees.addEventListener("submit", function(e) { fillEmployee(e); });
         }
     };
     requestEmployees.open("GET", "./data/persons.xml?" + new Date().getDate());
@@ -41,7 +41,7 @@ window.onload = function()
     
     requestDevices.onreadystatechange = function(e)
     {
-        if (requestDevices.readyState == XMLHttpRequest.DONE && requestDevices.status == 200)
+        if (requestDevices.readyState === XMLHttpRequest.DONE && requestDevices.status === 200)
         {
             var devices = new List("inp_dev", "dev_list", requestDevices.responseXML, "device", ["model", "sn", "it"]);
             devices.addEventListener("submit", function(e) { fillDevice(e); });

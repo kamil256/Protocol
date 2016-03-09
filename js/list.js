@@ -8,7 +8,7 @@ function List(inputId, tbodyId, xml, tag, infoArgs)
     
     var events =
     {
-        submit: function() {}
+        submit: function() { throw inputId + " element's submit event not handled"; }
     };
     
     this.addEventListener = function(eventName, eventFunction)
