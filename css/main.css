@@ -6,7 +6,6 @@ body {
     padding-left: 350px;
 }
 .toolbar {
-    position: fixed;
     top: 0;
     left: 0;
     bottom: 0;
@@ -15,28 +14,31 @@ body {
     box-shadow: 0 0 10px #111;
     padding: 10px;
     padding-right: 30px;
+    position: fixed;
 }
 .toolbar p {
     color: #ccc;
     font: 10px verdana;
     margin: 5px 0;
 }
-.toolbar > input {
+.toolbar input {
+    border-radius: 5px;
+    margin-top: 5px;
+    /*outline-color: green; find third color which fits and use here and on thole website */
     padding: 5px;
     width: 100%;
-    /*outline-color: green; find third color which fits and use here and on thole website */
 }
 .toolbar > hr {
     border-color: #555;
     margin: 20px 0;
 }
 .toolbar table {
-    position: absolute;
     background-color: white;
     border: 1px solid black;
     border-collapse: collapse;
     cursor: pointer;
     font: 11px courier;
+    position: absolute;
 }
 .toolbar table > tbody {
     display: none;
