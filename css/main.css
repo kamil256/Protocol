@@ -3,10 +3,34 @@
 }
 body {
     background-color: #C9CDD2;
+    padding-top: 50px;
     padding-left: 350px;
 }
+.top-toolbar {
+    background: linear-gradient(0deg, #111, #333);
+    box-shadow: 0 0 10px #111;
+    position: fixed; 
+    left: 0; 
+    right: 0; 
+    top: 0; 
+    height: 50px; 
+    z-index: 1;
+}
+.top-toolbar a {
+    color: white;
+    display: inline-block;
+    float: left;
+    font: bold 14px verdana;
+    height: 50px;
+    padding: 16px 20px;
+    text-decoration: none;
+    transition: 0.3s background-color;
+}
+.top-toolbar a:hover {
+    background-color: black;
+}
 .toolbar {
-    top: 0;
+    top: 50px;
     left: 0;
     bottom: 0;
     width: 350px;
