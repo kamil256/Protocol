@@ -12,7 +12,7 @@ body {
     width: 350px;
     background-color: #333;
     box-shadow: 0 0 10px #111;
-    padding: 10px;
+    padding: 15px;
     padding-right: 30px;
     position: fixed;
 }
@@ -26,6 +26,14 @@ body {
     margin-top: 5px;
     /*outline-color: green; find third color which fits and use here and on thole website */
     padding: 5px;
+    width: 100%;
+}
+.toolbar div {
+    background-color: #444; 
+    border: 1px #666 outset; 
+    border-radius: 5px; 
+    margin-top: 10px; 
+    padding: 5px 10px;
     width: 100%;
 }
 .toolbar > hr {
