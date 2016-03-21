@@ -6,28 +6,46 @@ body {
     padding-top: 50px;
     padding-left: 350px;
 }
-.top-toolbar {
-    background: linear-gradient(0deg, #111, #333);
+.menubar {
+    background: linear-gradient(0deg, #111, #333, #111);
     box-shadow: 0 0 10px #111;
-    position: fixed; 
     left: 0; 
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    position: fixed;
     right: 0; 
     top: 0; 
     height: 50px; 
     z-index: 1;
 }
-.top-toolbar a {
+.menubar > li {
+    float: left;
+}
+.menubar > li a {
     color: white;
     display: inline-block;
-    float: left;
     font: bold 14px verdana;
-    height: 50px;
-    padding: 16px 20px;
+    padding: 16px 25px;
+    text-align: left;
     text-decoration: none;
-    transition: 0.3s background-color;
 }
-.top-toolbar a:hover {
-    background-color: black;
+.menubar > li a:hover {
+    background: black;
+}
+.menubar > li > div {
+    background-color: #222;
+    position: absolute;
+    display: none;
+}
+.menubar > li:hover > div {
+    display: inline-block;
+}
+.menubar > li:hover > a {
+    background: black;
+}
+.menubar > li > div > a {
+    display: block;
 }
 .toolbar {
     top: 50px;
