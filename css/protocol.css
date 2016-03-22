@@ -1,0 +1,115 @@
+body {
+    background-color: #C9CDD2;
+}
+.toolbar {
+    top: 50px;
+    left: 0;
+    bottom: 0;
+    width: 350px;
+    background-color: #333;
+    box-shadow: 0 0 10px #111;
+    padding: 15px;
+    padding-right: 30px;
+    position: fixed;
+}
+.toolbar p {
+    color: #ccc;
+    font: 10px verdana;
+    margin: 5px 0;
+}
+.toolbar input {
+    border-radius: 5px;
+    margin-top: 5px;
+    padding: 5px;
+    width: 100%;
+}
+.toolbar div {
+    background-color: #444; 
+    border: 1px #666 outset; 
+    border-radius: 5px; 
+    margin-top: 10px; 
+    padding: 5px 10px;
+    width: 100%;
+}
+.toolbar > hr {
+    border-color: #555;
+    margin: 20px 0;
+}
+.toolbar table {
+    background-color: white;
+    border: 1px solid black;
+    border-collapse: collapse;
+    cursor: pointer;
+    font: 11px courier;
+    position: absolute;
+}
+.toolbar table > tbody {
+    display: none;
+    padding: 1px;
+}
+.toolbar table tbody tr:hover {
+    background-color: #ddd;
+}
+.toolbar tbody td {
+    border: none;
+    border-left: 1px dashed #ccc;
+    padding: 2px 10px;
+}
+.toolbar tbody td:first-child {
+    border: none;   
+}
+.toolbar tfoot {
+    display: none;
+}
+.toolbar tfoot td {
+    border: none;
+    font: bold 10px verdana;
+    text-align: center;
+}
+.toolbar div > p + p > span {
+    font: 12px Arial;
+    color: #aaa;
+}
+.toolbar div > p + p > span {
+    cursor: pointer;
+}
+.A4 {
+    width: 21cm;
+    height: 29.7cm;
+    background-color: white;
+    margin: 20px auto;
+    box-shadow: 0 0 15px #555;
+    padding: 2.5cm;
+}
+.A4 > h1 {
+    font: bold 12pt "Times New Roman";
+    margin: 0;
+    text-align: left;
+}
+.A4 > table {
+    border: 1px solid black;
+    border-collapse: collapse;
+    width: 100%;
+}
+.A4 > table td {
+    padding: 0 5px;
+    text-align: justify;
+    width: 50%;
+}
+.A4 > table h1 {
+    font: bold 12pt "Times New Roman";
+    margin: 0;
+    text-align: center;
+}
+.A4 p {
+    font: 12pt "Times New Roman";
+    margin: 0;
+    text-align: justify;
+}
+.A4 + .A4 + .A4 > table td {
+    padding: 5px;
+    font: 10pt verdana;
+}
+.A4 + .A4 + .A4 > table td:first-child {
+    width: 25%;
+}
