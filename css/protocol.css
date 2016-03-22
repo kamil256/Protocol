@@ -11,7 +11,6 @@ body {
     padding: 15px;
     padding-right: 30px;
     position: fixed;
-    z-index: -1;
 }
 .toolbar p {
     color: #ccc;
