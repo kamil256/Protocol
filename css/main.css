@@ -47,3 +47,6 @@ body {
 .menubar > li > div > a {
     display: block;
 }
+.menubar .selected {
+    color: #FFDEAD;
+}
