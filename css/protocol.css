@@ -67,13 +67,6 @@ body {
     font: bold 10px verdana;
     text-align: center;
 }
-.toolbar div > p + p > span {
-    font: 12px Arial;
-    color: #aaa;
-}
-.toolbar div > p + p > span {
-    cursor: pointer;
-}
 .A4 {
     width: 21cm;
     height: 29.7cm;

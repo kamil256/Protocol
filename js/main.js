@@ -3,9 +3,19 @@ window.onload = function()
     new Page("page_1").load();
     new Page("page_2").load();
     new Page("page_3").load();
+
+    var requestDepartments = new XMLHttpRequest();
+    var departments;
+    requestDepartments.onreadystatechange = function(e)
+    {
+        if (requestDepartments.readyState === XMLHttpRequest.DONE && requestDepartments.status === 200)
+            departments = requestDepartments.responseXML;
+    };
     
+    requestDepartments.open("GET", "./data/departments.xml?" + new Date().getDate());
+    requestDepartments.send();
+
     var requestEmployees = new XMLHttpRequest();
-    
     requestEmployees.onreadystatechange = function(e)
     {
         if (requestEmployees.readyState === XMLHttpRequest.DONE && requestEmployees.status === 200)
@@ -19,26 +29,50 @@ window.onload = function()
     
     function clearEmployee()
     {
-        document.getElementById("emp_id").innerHTML = "";
-        document.getElementById("emp_name").innerHTML = "";
-        document.getElementById("emp_department").innerHTML = "";
-        document.getElementById("emp_position").innerHTML = "";
-        document.getElementById("emp_mail").innerHTML = "";
-        document.getElementById("emp_tel").innerHTML = "";
+        document.getElementById("panel_emp_name").innerHTML = "---";
+        document.getElementById("panel_emp_id").innerHTML = "---";
+        document.getElementById("panel_emp_position").innerHTML = "---";
+        document.getElementById("panel_emp_team").innerHTML = "---";
+        document.getElementById("panel_emp_section").innerHTML = "---";
+        document.getElementById("panel_emp_part").innerHTML = "---";
+        document.getElementById("panel_emp_mail").innerHTML = "---";
+        document.getElementById("panel_emp_tel").innerHTML = "---";
+
+        document.getElementById("page_emp_name").innerHTML = "";
+        document.getElementById("page_emp_id").innerHTML = "";
+        document.getElementById("page_emp_position").innerHTML = "";
+        document.getElementById("page_emp_department").innerHTML = "";
+        document.getElementById("page_emp_mail").innerHTML = "";
+        document.getElementById("page_emp_tel").innerHTML = "";
     }
     
     function fillEmployee(employee)
     {
-        document.getElementById("emp_id").innerHTML = employee.id;
-        document.getElementById("emp_name").innerHTML = employee.name;
-        document.getElementById("emp_department").innerHTML = employee.department;
-        document.getElementById("emp_position").innerHTML = employee.position;
-        document.getElementById("emp_mail").innerHTML = employee.mail;
-        document.getElementById("emp_tel").innerHTML = employee.tel;
+        var part = departments.getElementById(employee.department);
+        var section = part.parentElement;
+        var team = section.parentElement;
+        part = part.getAttribute("name");
+        section = section.getAttribute("name");
+        team = team.getAttribute("name");
+
+        document.getElementById("panel_emp_name").innerHTML = employee.name;
+        document.getElementById("panel_emp_id").innerHTML = employee.id;
+        document.getElementById("panel_emp_position").innerHTML = employee.position;
+        document.getElementById("panel_emp_team").innerHTML = team;
+        document.getElementById("panel_emp_section").innerHTML = section;
+        document.getElementById("panel_emp_part").innerHTML = part;
+        document.getElementById("panel_emp_mail").innerHTML = employee.mail;
+        document.getElementById("panel_emp_tel").innerHTML = employee.tel;
+
+        document.getElementById("page_emp_name").innerHTML = employee.name;
+        document.getElementById("page_emp_id").innerHTML = employee.id;
+        document.getElementById("page_emp_position").innerHTML = employee.position;
+        document.getElementById("page_emp_department").innerHTML = employee.position === "Team Leader" ? team : (employee.position === "Section Leader" ? section : part);
+        document.getElementById("page_emp_mail").innerHTML = employee.mail;
+        document.getElementById("page_emp_tel").innerHTML = employee.tel;
     }
     
     var requestDevices = new XMLHttpRequest();
-    
     requestDevices.onreadystatechange = function(e)
     {
         if (requestDevices.readyState === XMLHttpRequest.DONE && requestDevices.status === 200)
