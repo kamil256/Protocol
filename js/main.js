@@ -4,8 +4,10 @@ window.onload = function()
     new Page("page_2").load();
     new Page("page_3").load();
 
+    var departments, employees, devices;
+
     var requestDepartments = new XMLHttpRequest();
-    var departments;
+    
     requestDepartments.onreadystatechange = function(e)
     {
         if (requestDepartments.readyState === XMLHttpRequest.DONE && requestDepartments.status === 200)
@@ -20,7 +22,7 @@ window.onload = function()
     {
         if (requestEmployees.readyState === XMLHttpRequest.DONE && requestEmployees.status === 200)
         {
-            var employees = new List("inp_emp", "emp_list", requestEmployees.responseXML, "person", ["id", "name", "department"]);
+            employees = new List("inp_emp", "emp_list", requestEmployees.responseXML, "person", ["id", "name", "department"]);
             employees.addEventListener("submit", function(e) { fillEmployee(e); });
         }
     };
@@ -49,7 +51,7 @@ window.onload = function()
     
     function fillEmployee(employee)
     {
-        var part = departments.getElementById(employee.department);
+        var part = departments.getElementById(employee.deptId);
         var section = part.parentElement;
         var team = section.parentElement;
         part = part.getAttribute("name");
@@ -73,7 +75,7 @@ window.onload = function()
     {
         if (requestDevices.readyState === XMLHttpRequest.DONE && requestDevices.status === 200)
         {
-            var devices = new List("inp_dev", "dev_list", requestDevices.responseXML, "device", ["model", "sn", "it"]);
+            devices = new List("inp_dev", "dev_list", requestDevices.responseXML, "device", ["model", "sn", "it"]);
             devices.addEventListener("submit", function(e) { fillDevice(e); });
         }
     };
