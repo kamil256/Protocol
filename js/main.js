@@ -27,23 +27,24 @@ window.onload = function()
     requestEmployees.open("GET", "./data/persons.xml?" + new Date().getDate());
     requestEmployees.send();
     
+    function fillElementsByClassName(className, content)
+    {
+        var elements = document.getElementsByClassName(className);
+        for (var i = 0; i < elements.length; i++)
+            elements[i].innerHTML = content;
+    }
+
     function clearEmployee()
     {
-        document.getElementById("panel_emp_name").innerHTML = "---";
-        document.getElementById("panel_emp_id").innerHTML = "---";
-        document.getElementById("panel_emp_position").innerHTML = "---";
-        document.getElementById("panel_emp_team").innerHTML = "---";
-        document.getElementById("panel_emp_section").innerHTML = "---";
-        document.getElementById("panel_emp_part").innerHTML = "---";
-        document.getElementById("panel_emp_mail").innerHTML = "---";
-        document.getElementById("panel_emp_tel").innerHTML = "---";
-
-        document.getElementById("page_emp_name").innerHTML = "";
-        document.getElementById("page_emp_id").innerHTML = "";
-        document.getElementById("page_emp_position").innerHTML = "";
-        document.getElementById("page_emp_department").innerHTML = "";
-        document.getElementById("page_emp_mail").innerHTML = "";
-        document.getElementById("page_emp_tel").innerHTML = "";
+        fillElementsByClassName("emp_name", "---");
+        fillElementsByClassName("emp_id", "---");
+        fillElementsByClassName("emp_position", "---");
+        fillElementsByClassName("emp_team", "---");
+        fillElementsByClassName("emp_section", "---");
+        fillElementsByClassName("emp_part", "---");
+        fillElementsByClassName("emp_department", "---");
+        fillElementsByClassName("emp_mail", "---");
+        fillElementsByClassName("emp_tel", "---");
     }
     
     function fillEmployee(employee)
@@ -54,22 +55,17 @@ window.onload = function()
         part = part.getAttribute("name");
         section = section.getAttribute("name");
         team = team.getAttribute("name");
+        var department = employee.position === "Team Leader" ? team : (employee.position === "Section Leader" ? section : part);
 
-        document.getElementById("panel_emp_name").innerHTML = employee.name;
-        document.getElementById("panel_emp_id").innerHTML = employee.id;
-        document.getElementById("panel_emp_position").innerHTML = employee.position;
-        document.getElementById("panel_emp_team").innerHTML = team;
-        document.getElementById("panel_emp_section").innerHTML = section;
-        document.getElementById("panel_emp_part").innerHTML = part;
-        document.getElementById("panel_emp_mail").innerHTML = employee.mail;
-        document.getElementById("panel_emp_tel").innerHTML = employee.tel;
-
-        document.getElementById("page_emp_name").innerHTML = employee.name;
-        document.getElementById("page_emp_id").innerHTML = employee.id;
-        document.getElementById("page_emp_position").innerHTML = employee.position;
-        document.getElementById("page_emp_department").innerHTML = employee.position === "Team Leader" ? team : (employee.position === "Section Leader" ? section : part);
-        document.getElementById("page_emp_mail").innerHTML = employee.mail;
-        document.getElementById("page_emp_tel").innerHTML = employee.tel;
+        fillElementsByClassName("emp_name", employee.name);
+        fillElementsByClassName("emp_id", employee.id);
+        fillElementsByClassName("emp_position", employee.position);
+        fillElementsByClassName("emp_team", team);
+        fillElementsByClassName("emp_section", section);
+        fillElementsByClassName("emp_part", part);
+        fillElementsByClassName("emp_department", department);
+        fillElementsByClassName("emp_mail", employee.mail);
+        fillElementsByClassName("emp_tel", employee.tel);
     }
     
     var requestDevices = new XMLHttpRequest();
