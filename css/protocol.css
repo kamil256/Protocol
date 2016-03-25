@@ -30,7 +30,20 @@ body {
     border-radius: 5px; 
     margin-top: 10px; 
     padding: 5px 10px;
+    position: relative;
     width: 100%;
+}
+.toolbar .cross {
+    color: black;
+    cursor: default;
+    display: inline-block;
+    font: bold 10px monotype;
+    position: absolute;
+    right: 10px;
+    top: 6px;
+}
+.toolbar .cross:hover {
+    color: #333;
 }
 .toolbar > hr {
     border-color: #555;
@@ -43,6 +56,7 @@ body {
     cursor: pointer;
     font: 11px courier;
     position: absolute;
+    z-index: 1;
 }
 .toolbar table > tbody {
     display: none;

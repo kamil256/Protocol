@@ -9,6 +9,9 @@ function getDate()
 
 window.onload = function()
 {
+    document.getElementById("cross_emp").onclick = clearEmployee;
+    document.getElementById("cross_dev").onclick = clearDevice;
+
     new Page("page_1").load();
     new Page("page_2").load();
     new Page("page_3").load();
@@ -16,10 +19,12 @@ window.onload = function()
         function() 
         { 
             var dateSpans = document.getElementsByClassName("date");
-            for (var i = 0; i < dateSpans.length; i++)
-                dateSpans[i].innerHTML = getDate(); 
             if (dateSpans.length > 0)
+            {
+                for (var i = 0; i < dateSpans.length; i++)
+                    dateSpans[i].innerHTML = getDate(); 
                 clearInterval(dateInterval);
+            }
         }, 1
     );
 
@@ -104,21 +109,21 @@ window.onload = function()
     
     function clearDevice()
     {
-        document.getElementById("dev_model").innerHTML = "";
-        document.getElementById("dev_sn").innerHTML = "";
-        document.getElementById("dev_it").innerHTML = "";
-        document.getElementById("dev_wrof").innerHTML = "";
-        document.getElementById("dev_ssd").innerHTML = "";
-        document.getElementById("dev_hdd").innerHTML = "";
+        fillElementsByClassName("dev_model", "---");
+        fillElementsByClassName("dev_sn", "---");
+        fillElementsByClassName("dev_it", "---");
+        fillElementsByClassName("dev_wrof", "---");
+        fillElementsByClassName("dev_ssd", "---");
+        fillElementsByClassName("dev_hdd", "---");
     }
     
     function fillDevice(device)
     {
-        document.getElementById("dev_model").innerHTML = device.model;
-        document.getElementById("dev_sn").innerHTML = device.sn;
-        document.getElementById("dev_it").innerHTML = device.it;
-        document.getElementById("dev_wrof").innerHTML = device.wrof;
-        document.getElementById("dev_ssd").innerHTML = device.ssd;
-        document.getElementById("dev_hdd").innerHTML = device.hdd;
+        fillElementsByClassName("dev_model", device.model);
+        fillElementsByClassName("dev_sn", device.sn);
+        fillElementsByClassName("dev_it", device.it);
+        fillElementsByClassName("dev_wrof", device.wrof);
+        fillElementsByClassName("dev_ssd", device.ssd);
+        fillElementsByClassName("dev_hdd", device.hdd);
     }
 };
