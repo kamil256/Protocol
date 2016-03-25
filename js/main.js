@@ -1,8 +1,27 @@
+function getDate()
+{
+    var date = new Date();
+    var day = date.getDate();
+    var month = date.getMonth() + 1;
+    var year = date.getFullYear();
+    return day + "." + (month < 10 ? "0" + month : month) + "." + year;
+}
+
 window.onload = function()
 {
     new Page("page_1").load();
     new Page("page_2").load();
     new Page("page_3").load();
+    var dateInterval = window.setInterval(
+        function() 
+        { 
+            var dateSpans = document.getElementsByClassName("date");
+            for (var i = 0; i < dateSpans.length; i++)
+                dateSpans[i].innerHTML = getDate(); 
+            if (dateSpans.length > 0)
+                clearInterval(dateInterval);
+        }, 1
+    );
 
     var departments, employees, devices;
 
