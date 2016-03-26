@@ -115,6 +115,8 @@ window.onload = function()
         fillElementsByClassName("dev_wrof", "---");
         fillElementsByClassName("dev_ssd", "---");
         fillElementsByClassName("dev_hdd", "---");
+        fillElementsByClassName("dev_lan_mac", "---");
+        fillElementsByClassName("wifi_wifi_mac", "---");
     }
     
     function fillDevice(device)
@@ -125,5 +127,7 @@ window.onload = function()
         fillElementsByClassName("dev_wrof", device.wrof);
         fillElementsByClassName("dev_ssd", device.ssd);
         fillElementsByClassName("dev_hdd", device.hdd);
+        fillElementsByClassName("dev_lan_mac", device.lan_mac);
+        fillElementsByClassName("dev_wifi_mac", device.wifi_mac);
     }
 };
