@@ -59,8 +59,7 @@ window.onload = function()
     {
         if (requestEmployees.readyState === XMLHttpRequest.DONE && requestEmployees.status === 200)
         {
-            employees = new List("inp_emp", "emp_list", requestEmployees.responseXML, "person", ["id", "name", "department"]);
-            employees.addEventListener("submit", function(e) { fillEmployee(e); });
+            new List("inp_emp", "emp_list", requestEmployees.responseXML, "person", ["id", "name", "department"]).addEventListener("submit", function(e) { fillEmployee(e); });
         }
     };
     requestEmployees.open("GET", "./data/persons.xml?" + new Date().getDate());
