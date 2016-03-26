@@ -91,8 +91,8 @@ function fillDevice(device)
 
 window.onload = function()
 {
-    xmlToObjectsArray("./data/persons.xml?" + new Date().getDate(), "person", employees);
-    xmlToObjectsArray("./data/devices.xml?" + new Date().getDate(), "device", devices);
+    xmlToObjectsArray("./data/persons.xml?" + new Date().getTime(), "person", employees);
+    xmlToObjectsArray("./data/devices.xml?" + new Date().getTime(), "device", devices);
 
     document.getElementById("cross_emp").onclick = clearEmployee;
     document.getElementById("cross_dev").onclick = clearDevice;
