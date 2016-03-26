@@ -7,65 +7,36 @@ function getDate()
     return day + "." + (month < 10 ? "0" + month : month) + "." + year;
 }
 
-function Employee(name, id, position, team, section, part, mail, tel)
-{
-    this.name = name;
-    this.id = id;
-    this.position = position;
-    this.team = team;
-    this.section = section;
-    this.part = part;
-    this.mail = mail;
-    this.tel = tel;
-}
+var employees = [];
+var devices = [];
 
-function getEmployees(callback, argName, argId, argPosition, argTeam, argSection, argPart, argMail, argTel)
+function xmlToObjectsArray(xmlPath, tag, objectsArray)
 {
-    this.employees = [];
-
-    var requestEmployees = new XMLHttpRequest();
-    requestEmployees.onreadystatechange = function(e)
+    var request = new XMLHttpRequest();
+    request.onreadystatechange = function(e)
     {
-        if (requestEmployees.readyState === XMLHttpRequest.DONE && requestEmployees.status === 200)
+        if (request.readyState === XMLHttpRequest.DONE && request.status === 200)
         {
-            var elements = requestEmployees.responseXML.getElementsByTagName("person");
+            var elements = request.responseXML.getElementsByTagName(tag);
             for (var i = 0; i < elements.length; i++)
             {
-                var name = elements[i].getElementsByTagName("name")[0].innerHTML;
-                if (name.toUpperCase().indexOf(argName.toUpperCase()) === -1)
-                    continue;
-                var id = elements[i].getElementsByTagName("id")[0].innerHTML;
-                if (id.toUpperCase().indexOf(argId.toUpperCase()) === -1)
-                    continue;
-                var position = elements[i].getElementsByTagName("position")[0].innerHTML;
-                if (position.toUpperCase().indexOf(argPosition.toUpperCase()) === -1)
-                    continue;
-                var team = "";//elements[i].getElementsByTagName("")[0].innerHTML;
-                if (team.toUpperCase().indexOf(argTeam.toUpperCase()) === -1)
-                    continue;
-                var section = "";//elements[i].getElementsByTagName("")[0].innerHTML;
-                if (section.toUpperCase().indexOf(argSection.toUpperCase()) === -1)
-                    continue;
-                var part = "";//elements[i].getElementsByTagName("")[0].innerHTML;
-                if (part.toUpperCase().indexOf(argPart.toUpperCase()) === -1)
-                    continue;
-                var mail = elements[i].getElementsByTagName("mail")[0].innerHTML;
-                if (mail.toUpperCase().indexOf(argMail.toUpperCase()) === -1)
-                    continue;
-                var tel = elements[i].getElementsByTagName("tel")[0].innerHTML;
-                if (tel.toUpperCase().indexOf(argTel.toUpperCase()) === -1)
-                    continue;
-                employees.push(new Employee(name, id, position, team, section, part, mail, tel));
+                var elements2 = elements[i].getElementsByTagName("*");
+                var obj = {};
+                for (var j = 0; j < elements2.length; j++)
+                    obj[elements2[j].nodeName] = elements2[j].childNodes[0].nodeValue;
+                objectsArray.push(obj);
             }
-            callback();
         }
     };
-    requestEmployees.open("GET", "./data/persons.xml?" + new Date().getDate());
-    requestEmployees.send();
+    request.open("GET", xmlPath + new Date().getDate());
+    request.send();
 }
 
 window.onload = function()
 {
+    xmlToObjectsArray("./data/persons.xml?" + new Date().getDate(), "person", employees);
+    xmlToObjectsArray("./data/devices.xml?" + new Date().getDate(), "device", devices);
+
     document.getElementById("cross_emp").onclick = clearEmployee;
     document.getElementById("cross_dev").onclick = clearDevice;
 
@@ -97,19 +68,6 @@ window.onload = function()
                 accessories = "---";
             document.getElementById("accessories").innerHTML = accessories;
         };
-
-    var departments, employees, devices;
-
-    var requestDepartments = new XMLHttpRequest();
-    
-    requestDepartments.onreadystatechange = function(e)
-    {
-        if (requestDepartments.readyState === XMLHttpRequest.DONE && requestDepartments.status === 200)
-            departments = requestDepartments.responseXML;
-    };
-    
-    requestDepartments.open("GET", "./data/departments.xml?" + new Date().getDate());
-    requestDepartments.send();
 
     var requestEmployees = new XMLHttpRequest();
     requestEmployees.onreadystatechange = function(e)
@@ -144,20 +102,13 @@ window.onload = function()
     
     function fillEmployee(employee)
     {
-        var part = departments.getElementById(employee.deptId);
-        var section = part.parentElement;
-        var team = section.parentElement;
-        part = part.getAttribute("name");
-        section = section.getAttribute("name");
-        team = team.getAttribute("name");
-        var department = employee.position === "Team Leader" ? team : (employee.position === "Section Leader" ? section : part);
-
+        var department = employee.position === "Team Leader" ? employee.team : (employee.position === "Section Leader" ? employee.section : employee.part);
         fillElementsByClassName("emp_name", employee.name);
         fillElementsByClassName("emp_id", employee.id);
         fillElementsByClassName("emp_position", employee.position);
-        fillElementsByClassName("emp_team", team);
-        fillElementsByClassName("emp_section", section);
-        fillElementsByClassName("emp_part", part);
+        fillElementsByClassName("emp_team", employee.team);
+        fillElementsByClassName("emp_section", employee.section);
+        fillElementsByClassName("emp_part", employee.part);
         fillElementsByClassName("emp_department", department);
         fillElementsByClassName("emp_mail", employee.mail);
         fillElementsByClassName("emp_tel", employee.tel);
@@ -168,8 +119,7 @@ window.onload = function()
     {
         if (requestDevices.readyState === XMLHttpRequest.DONE && requestDevices.status === 200)
         {
-            devices = new List("inp_dev", "dev_list", requestDevices.responseXML, "device", ["model_id", "sn", "it"]);
-            devices.addEventListener("submit", function(e) { fillDevice(e); });
+            new List("inp_dev", "dev_list", requestDevices.responseXML, "device", ["model_id", "sn", "it"]).addEventListener("submit", function(e) { fillDevice(e); });
         }
     };
     
