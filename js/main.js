@@ -7,6 +7,63 @@ function getDate()
     return day + "." + (month < 10 ? "0" + month : month) + "." + year;
 }
 
+function Employee(name, id, position, team, section, part, mail, tel)
+{
+    this.name = name;
+    this.id = id;
+    this.position = position;
+    this.team = team;
+    this.section = section;
+    this.part = part;
+    this.mail = mail;
+    this.tel = tel;
+}
+
+function getEmployees(callback, argName, argId, argPosition, argTeam, argSection, argPart, argMail, argTel)
+{
+    this.employees = [];
+
+    var requestEmployees = new XMLHttpRequest();
+    requestEmployees.onreadystatechange = function(e)
+    {
+        if (requestEmployees.readyState === XMLHttpRequest.DONE && requestEmployees.status === 200)
+        {
+            var elements = requestEmployees.responseXML.getElementsByTagName("person");
+            for (var i = 0; i < elements.length; i++)
+            {
+                var name = elements[i].getElementsByTagName("name")[0].innerHTML;
+                if (name.toUpperCase().indexOf(argName.toUpperCase()) === -1)
+                    continue;
+                var id = elements[i].getElementsByTagName("id")[0].innerHTML;
+                if (id.toUpperCase().indexOf(argId.toUpperCase()) === -1)
+                    continue;
+                var position = elements[i].getElementsByTagName("position")[0].innerHTML;
+                if (position.toUpperCase().indexOf(argPosition.toUpperCase()) === -1)
+                    continue;
+                var team = "";//elements[i].getElementsByTagName("")[0].innerHTML;
+                if (team.toUpperCase().indexOf(argTeam.toUpperCase()) === -1)
+                    continue;
+                var section = "";//elements[i].getElementsByTagName("")[0].innerHTML;
+                if (section.toUpperCase().indexOf(argSection.toUpperCase()) === -1)
+                    continue;
+                var part = "";//elements[i].getElementsByTagName("")[0].innerHTML;
+                if (part.toUpperCase().indexOf(argPart.toUpperCase()) === -1)
+                    continue;
+                var mail = elements[i].getElementsByTagName("mail")[0].innerHTML;
+                if (mail.toUpperCase().indexOf(argMail.toUpperCase()) === -1)
+                    continue;
+                var tel = elements[i].getElementsByTagName("tel")[0].innerHTML;
+                if (tel.toUpperCase().indexOf(argTel.toUpperCase()) === -1)
+                    continue;
+                employees.push(new Employee(name, id, position, team, section, part, mail, tel));
+            }
+            callback();
+        }
+    };
+    requestEmployees.open("GET", "./data/persons.xml?" + new Date().getDate());
+    requestEmployees.send();
+}
+
 window.onload = function()
 {
     document.getElementById("cross_emp").onclick = clearEmployee;
