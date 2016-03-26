@@ -112,7 +112,7 @@ window.onload = function()
     {
         if (requestDevices.readyState === XMLHttpRequest.DONE && requestDevices.status === 200)
         {
-            devices = new List("inp_dev", "dev_list", requestDevices.responseXML, "device", ["model", "sn", "it"]);
+            devices = new List("inp_dev", "dev_list", requestDevices.responseXML, "device", ["model_id", "sn", "it"]);
             devices.addEventListener("submit", function(e) { fillDevice(e); });
         }
     };
@@ -134,7 +134,7 @@ window.onload = function()
     
     function fillDevice(device)
     {
-        fillElementsByClassName("dev_model", device.model);
+        fillElementsByClassName("dev_model", device.model_id);
         fillElementsByClassName("dev_sn", device.sn);
         fillElementsByClassName("dev_it", device.it);
         fillElementsByClassName("dev_wrof", device.wrof);
