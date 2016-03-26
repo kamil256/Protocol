@@ -23,7 +23,7 @@ body {
 }
 .menubar > li a {
     color: white;
-    display: inline-block;
+    display: block;
     font: bold 14px verdana;
     padding: 16px 25px;
     text-align: left;

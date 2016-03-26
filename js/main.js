@@ -28,6 +28,19 @@ window.onload = function()
         }, 1
     );
 
+    var checkboxes = document.getElementsByClassName("accessories");
+    for (var i = 0; i < checkboxes.length; i++)
+        checkboxes[i].onchange = function(e) 
+        {
+            var accessories = "";
+            for (var i = 0; i < checkboxes.length; i++)
+                if (checkboxes[i].checked)
+                    accessories += (accessories.length === 0) ? checkboxes[i].id : ", " + checkboxes[i].id;
+            if (accessories.length === 0)
+                accessories = "---";
+            document.getElementById("accessories").innerHTML = accessories;
+        };
+
     var departments, employees, devices;
 
     var requestDepartments = new XMLHttpRequest();

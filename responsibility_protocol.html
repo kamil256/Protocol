@@ -23,7 +23,7 @@
         </ul>
         <div class="toolbar">
             <p>Employee:</p>
-            <input id="inp_emp" />
+            <input type="text" id="inp_emp" />
             <table border="1"><tbody id="emp_list"></tbody><tfoot></tfoot></table>
             <div>
                 <p>Name: <span class="emp_name">---</span></p>
@@ -40,7 +40,7 @@
             <hr />
 
             <p>Device:</p>
-            <input id="inp_dev" />
+            <input type="text" id="inp_dev" />
             <table border="1"><tbody id="dev_list"></tbody><tfoot></tfoot></table>
             <div>
                 <p>Model: <span class="dev_model">---</span></p>
@@ -52,6 +52,18 @@
                 <p>LAN MAC Address: <span class="dev_lan_mac">---</span></p>
                 <p>Wireless MAC Address: <span class="dev_wifi_mac">---</span></p>
                 <span id="cross_dev" class="cross">&#x274C;</span>
+            </div>
+
+            <hr />
+
+            <p>Accessories:</p>
+            <div>
+                <input  class="accessories" id="Bag" type="checkbox" checked="checked" /><label for="Bag">Bag</label>
+                <input  class="accessories" id="Locker" type="checkbox" checked="checked" /><label for="Locker">Locker</label>
+                <input  class="accessories" id="Keyboard" type="checkbox" /><label for="Keyboard">Keyboard</label>
+                <input  class="accessories" id="Mouse" type="checkbox" /><label for="Mouse">Mouse</label>
+                <input  class="accessories" id="LAN Adapter" type="checkbox" /><label for="LAN Adapter">LAN Adapter</label>
+                <input  class="accessories" id="VGA Adapter" type="checkbox" /><label for="VGA Adapter">VGA Adapter</label>
             </div>
         </div>
         <div class="A4" id="page_1"></div>

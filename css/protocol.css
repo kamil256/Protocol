@@ -12,17 +12,26 @@ body {
     padding: 15px;
     padding-right: 30px;
     position: fixed;
+    overflow: auto;
 }
 .toolbar p {
     color: #ccc;
     font: 10px verdana;
     margin: 5px 0;
 }
-.toolbar input {
+.toolbar input[type="text"] {
     border-radius: 5px;
     margin-top: 5px;
     padding: 5px;
     width: 100%;
+}
+.toolbar input[type="checkbox"] {
+    vertical-align: middle;
+}
+.toolbar input[type="checkbox"]+label {
+    color: #ccc;
+    font: 10px verdana;
+    margin-right: 10px;
 }
 .toolbar div {
     background-color: #444; 
