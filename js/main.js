@@ -32,6 +32,63 @@ function xmlToObjectsArray(xmlPath, tag, objectsArray)
     request.send();
 }
 
+function fillElementsByClassName(className, content)
+{
+    var elements = document.getElementsByClassName(className);
+    for (var i = 0; i < elements.length; i++)
+        elements[i].innerHTML = content;
+}
+
+function clearEmployee()
+{
+    fillElementsByClassName("emp_name", "---");
+    fillElementsByClassName("emp_id", "---");
+    fillElementsByClassName("emp_position", "---");
+    fillElementsByClassName("emp_team", "---");
+    fillElementsByClassName("emp_section", "---");
+    fillElementsByClassName("emp_part", "---");
+    fillElementsByClassName("emp_department", "---");
+    fillElementsByClassName("emp_mail", "---");
+    fillElementsByClassName("emp_tel", "---");
+}
+
+function fillEmployee(employee)
+{
+    fillElementsByClassName("emp_name", employee.name);
+    fillElementsByClassName("emp_id", employee.id);
+    fillElementsByClassName("emp_position", employee.position);
+    fillElementsByClassName("emp_team", employee.team);
+    fillElementsByClassName("emp_section", employee.section);
+    fillElementsByClassName("emp_part", employee.part);
+    fillElementsByClassName("emp_department", employee.department);
+    fillElementsByClassName("emp_mail", employee.mail);
+    fillElementsByClassName("emp_tel", employee.tel);
+}
+
+function clearDevice()
+{
+    fillElementsByClassName("dev_model", "---");
+    fillElementsByClassName("dev_sn", "---");
+    fillElementsByClassName("dev_it", "---");
+    fillElementsByClassName("dev_wrof", "---");
+    fillElementsByClassName("dev_ssd", "---");
+    fillElementsByClassName("dev_hdd", "---");
+    fillElementsByClassName("dev_lan_mac", "---");
+    fillElementsByClassName("wifi_wifi_mac", "---");
+}
+
+function fillDevice(device)
+{
+    fillElementsByClassName("dev_model", device.model_id);
+    fillElementsByClassName("dev_sn", device.sn);
+    fillElementsByClassName("dev_it", device.it);
+    fillElementsByClassName("dev_wrof", device.wrof);
+    fillElementsByClassName("dev_ssd", device.ssd);
+    fillElementsByClassName("dev_hdd", device.hdd);
+    fillElementsByClassName("dev_lan_mac", device.lan_mac);
+    fillElementsByClassName("dev_wifi_mac", device.wifi_mac);
+}
+
 window.onload = function()
 {
     xmlToObjectsArray("./data/persons.xml?" + new Date().getDate(), "person", employees);
@@ -69,84 +126,6 @@ window.onload = function()
             document.getElementById("accessories").innerHTML = accessories;
         };
 
-    var requestEmployees = new XMLHttpRequest();
-    requestEmployees.onreadystatechange = function(e)
-    {
-        if (requestEmployees.readyState === XMLHttpRequest.DONE && requestEmployees.status === 200)
-        {
-            new List("inp_emp", "emp_list", requestEmployees.responseXML, "person", ["id", "name", "department"]).addEventListener("submit", function(e) { fillEmployee(e); });
-        }
-    };
-    requestEmployees.open("GET", "./data/persons.xml?" + new Date().getDate());
-    requestEmployees.send();
-    
-    function fillElementsByClassName(className, content)
-    {
-        var elements = document.getElementsByClassName(className);
-        for (var i = 0; i < elements.length; i++)
-            elements[i].innerHTML = content;
-    }
-
-    function clearEmployee()
-    {
-        fillElementsByClassName("emp_name", "---");
-        fillElementsByClassName("emp_id", "---");
-        fillElementsByClassName("emp_position", "---");
-        fillElementsByClassName("emp_team", "---");
-        fillElementsByClassName("emp_section", "---");
-        fillElementsByClassName("emp_part", "---");
-        fillElementsByClassName("emp_department", "---");
-        fillElementsByClassName("emp_mail", "---");
-        fillElementsByClassName("emp_tel", "---");
-    }
-    
-    function fillEmployee(employee)
-    {
-        var department = employee.position === "Team Leader" ? employee.team : (employee.position === "Section Leader" ? employee.section : employee.part);
-        fillElementsByClassName("emp_name", employee.name);
-        fillElementsByClassName("emp_id", employee.id);
-        fillElementsByClassName("emp_position", employee.position);
-        fillElementsByClassName("emp_team", employee.team);
-        fillElementsByClassName("emp_section", employee.section);
-        fillElementsByClassName("emp_part", employee.part);
-        fillElementsByClassName("emp_department", department);
-        fillElementsByClassName("emp_mail", employee.mail);
-        fillElementsByClassName("emp_tel", employee.tel);
-    }
-    
-    var requestDevices = new XMLHttpRequest();
-    requestDevices.onreadystatechange = function(e)
-    {
-        if (requestDevices.readyState === XMLHttpRequest.DONE && requestDevices.status === 200)
-        {
-            new List("inp_dev", "dev_list", requestDevices.responseXML, "device", ["model_id", "sn", "it"]).addEventListener("submit", function(e) { fillDevice(e); });
-        }
-    };
-    
-    requestDevices.open("GET", "./data/devices.xml?" + new Date().getDate());
-    requestDevices.send();
-    
-    function clearDevice()
-    {
-        fillElementsByClassName("dev_model", "---");
-        fillElementsByClassName("dev_sn", "---");
-        fillElementsByClassName("dev_it", "---");
-        fillElementsByClassName("dev_wrof", "---");
-        fillElementsByClassName("dev_ssd", "---");
-        fillElementsByClassName("dev_hdd", "---");
-        fillElementsByClassName("dev_lan_mac", "---");
-        fillElementsByClassName("wifi_wifi_mac", "---");
-    }
-    
-    function fillDevice(device)
-    {
-        fillElementsByClassName("dev_model", device.model_id);
-        fillElementsByClassName("dev_sn", device.sn);
-        fillElementsByClassName("dev_it", device.it);
-        fillElementsByClassName("dev_wrof", device.wrof);
-        fillElementsByClassName("dev_ssd", device.ssd);
-        fillElementsByClassName("dev_hdd", device.hdd);
-        fillElementsByClassName("dev_lan_mac", device.lan_mac);
-        fillElementsByClassName("dev_wifi_mac", device.wifi_mac);
-    }
+    new List("inp_emp", "emp_list", employees, "person", ["id", "name", "department"]).addEventListener("submit", function(e) { fillEmployee(e); });
+    new List("inp_dev", "dev_list", devices, "device", ["model_id", "sn", "it"]).addEventListener("submit", function(e) { fillDevice(e); });
 };

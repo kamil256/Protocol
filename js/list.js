@@ -1,4 +1,4 @@
-function List(inputId, tbodyId, xml, tag, infoArgs)
+function List(inputId, tbodyId, objectsArray, tag, infoArgs)
 {
     var input = document.getElementById(inputId);
     var tbody = document.getElementById(tbodyId);
@@ -88,19 +88,14 @@ function List(inputId, tbodyId, xml, tag, infoArgs)
     function fill()
     {
         var more = 0;
-        var elem = xml.getElementsByTagName(tag);
-        for (var i = 0; i < elem.length; i++)
+        for (var i = 0; i < objectsArray.length; i++)
         {
-            var elem2 = elem[i].getElementsByTagName("*");
-            var obj = {};
-            for (var j = 0; j < elem2.length; j++)
-                obj[elem2[j].nodeName] = elem2[j].childNodes[0].nodeValue;
-            for (var x in obj)
+            for (var x in objectsArray[i])
             {
-                if (obj[x].toUpperCase().indexOf(input.value.toUpperCase()) != -1)
+                if (objectsArray[i][x].toUpperCase().indexOf(input.value.toUpperCase()) != -1)
                 {
                     if (items.length < LIMIT)
-                        items.push(obj);
+                        items.push(objectsArray[i]);
                     else
                         more++;
                     break;
